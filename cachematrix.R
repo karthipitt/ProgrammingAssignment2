@@ -2,14 +2,14 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
-  set <- function(y) {
+  set <- function(y) {					## Setting a matrix
     x <<- y
     inv <<- NULL
-  }
-  get <- function() x
-  setinverse <- function(inverse) inv <<- inverse
-  getinverse <- function() inv
-  list(set = set, get = get,
+  }						
+  get <- function() x					## Retrieving a matrix	
+  setinverse <- function(inverse) inv <<- inverse	## Setting inverse of matrix
+  getinverse <- function() inv				## Retrieving inverse of matrix
+  list(set = set, get = get,	
        setinverse = setinverse,
        getinverse = getinverse)
 }
@@ -19,11 +19,11 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) { 
   inv <- x$getinverse()
   if(!([inv count] == 0) ) {
-    message("getting cached data")   ## If inverse has been calculated previously, reading it from cache.
+    message("getting cached data")   			## If inverse has been calculated previously, reading it from cache.
     return(inv)
   }
-  matrix <- x$getinverse()  # Matrix is received from parent.
-  inv <- solve(matrix)  # Matrix is solved for inverse
-  x$setinverse(inv)  ## Inverse calculated is stored to parent environment.
-  inv    ## Inverse is returned
+  matrix <- x$getinverse()  				## Matrix is received from parent.
+  inv <- solve(matrix)  				## Matrix is solved for inverse
+  x$setinverse(inv)  					## Inverse calculated is stored to parent environment.
+  inv    						## Inverse is returned
 }
